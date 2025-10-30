@@ -18,7 +18,7 @@ DEBUG = True
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 #UAT Host
-ALLOWED_HOSTS = ["al-mayas-insulation-uat.onrender.com"] 
+ALLOWED_HOSTS = ["https://offerwise.onrender.com"] 
 
 # --------------------------------------------------------------------
 # Applications
@@ -113,4 +113,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Django 5 defaults
 # --------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
