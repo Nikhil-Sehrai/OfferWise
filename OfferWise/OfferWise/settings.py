@@ -18,14 +18,15 @@ DEBUG = True
 # Allow local development
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
+
+#UAT Host
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com", "offerwise.onrender.com"]
+
 # If Render sets RENDER_EXTERNAL_HOSTNAME, add it explicitly
 hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if hostname and hostname not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(hostname)
     CSRF_TRUSTED_ORIGINS.append(f"https://{hostname}")
-
-#UAT Host
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com", "offerwise.onrender.com"]
 
 # CSRF for HTTPS on Render
 CSRF_TRUSTED_ORIGINS = [
@@ -139,6 +140,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Django 5 defaults
 # --------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 
