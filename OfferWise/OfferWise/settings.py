@@ -17,8 +17,23 @@ DEBUG = True
 # Allow local development
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
+# If Render sets RENDER_EXTERNAL_HOSTNAME, add it explicitly
+hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if hostname and hostname not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(hostname)
+    CSRF_TRUSTED_ORIGINS.append(f"https://{hostname}")
+
 #UAT Host
-ALLOWED_HOSTS = ["https://offerwise.onrender.com"] 
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com", "offerwise.onrender.com"]
+
+# CSRF for HTTPS on Render
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+    "https://offerwise.onrender.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
 
 # --------------------------------------------------------------------
 # Applications
@@ -37,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",   # <— add this
     'django.contrib.sessions.middleware.SessionMiddleware',  # sessions enabled
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -44,6 +60,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ROOT_URLCONF = 'OfferWise.urls'
 
@@ -100,10 +120,15 @@ USE_TZ = True
 # Static & Media (dev)
 # --------------------------------------------------------------------
 # Static files served from /static/ in dev
+"""
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]   # <-- our pack's /static
 # Where collectstatic will gather all static files
 STATIC_ROOT = BASE_DIR / "staticfiles"
+"""
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
 
 # (Optional) If you ever add uploads later:
 MEDIA_URL = 'media/'
@@ -113,5 +138,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Django 5 defaults
 # --------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
