@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Benchmarks · OfferWise{% endblock %}
+{% block content %}
+<h2 class="mb-3">Benchmarks</h2>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-3"><span class="text-secondary small">Role</span><div class="fw-semibold">{{ role }}</div></div>
+      <div class="col-md-2"><span class="text-secondary small">City</span><div class="fw-semibold">{{ city }}</div></div>
+      <div class="col-md-2"><span class="text-secondary small">Level</span><div class="fw-semibold">{{ level }}</div></div>
+      <div class="col-md-5">
+        <span class="text-secondary small">Base (P25–P50–P75)</span>
+        <div class="fw-semibold">₹ {{ p25 }}L — ₹ {{ p50 }}L — ₹ {{ p75 }}L</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-info mt-3 small">These are seeded demo ranges for prototype purposes.</div>
+
+<div class="d-flex gap-2 mt-3">
+  <a class="btn btn-primary" href="{% url 'simulator' %}?role={{ role }}&city={{ city }}&level={{ level }}&base={{ base }}&bonus={{ bonus }}&jb={{ jb }}&p25={{ p25 }}&p50={{ p50 }}&p75={{ p75 }}">Continue to Simulator</a>
+  <a class="btn btn-outline-secondary" href="{% url 'offer_new' %}">Edit</a>
+</div>
+{% endblock %}

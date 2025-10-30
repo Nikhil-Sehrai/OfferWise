@@ -1,0 +1,16 @@
+:root{
+  --ow-primary:#6C63FF;   /* Indigo */
+  --ow-accent:#00C389;    /* Teal */
+  --ow-bg:#F7F8FA;
+  --ow-text:#1F2937;
+  --ow-muted:#6B7280;
+}
+body{background:var(--ow-bg);color:var(--ow-text);}
+.navbar-brand .brand-badge{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--ow-primary),var(--ow-accent));display:inline-block}
+.btn-primary{--bs-btn-bg:var(--ow-primary);--bs-btn-border-color:var(--ow-primary);--bs-btn-hover-bg:#5851e6;--bs-btn-hover-border-color:#5851e6}
+.btn-outline-primary{--bs-btn-color:var(--ow-primary);--bs-btn-border-color:var(--ow-primary);--bs-btn-hover-bg:var(--ow-primary);--bs-btn-hover-border-color:var(--ow-primary)}
+.progress-bar{background:var(--ow-accent);}
+.stat-card{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff}
+.stat-value{font-weight:700;font-size:1.25rem}
+.stat-label{color:var(--ow-muted);font-size:.85rem}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace}

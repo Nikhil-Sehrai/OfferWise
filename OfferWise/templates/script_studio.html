@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Script Studio · OfferWise{% endblock %}
+{% block content %}
+<h2 class="mb-3">Script Studio</h2>
+<div class="card p-3 shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <label class="form-label">Tone</label>
+      <select id="tone" class="form-select">
+        <option>Professional</option>
+        <option>Warm</option>
+        <option>Concise</option>
+      </select>
+    </div>
+    <div class="col-md-9">
+      <label class="form-label">Generated Email</label>
+      <textarea id="email" rows="8" class="form-control mono"></textarea>
+      <div class="mt-2 d-flex gap-2">
+        <button id="gen" class="btn btn-primary">Generate Script</button>
+        <button id="copy" class="btn btn-outline-primary">Copy</button>
+      </div>
+      <div id="copied" class="small text-secondary mt-2"></div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+  <a class="btn btn-success" href="{% url 'review' %}">Review & Export</a>
+  <a class="btn btn-outline-secondary" href="{% url 'simulator' %}">Back</a>
+</div>
+
+<script>
+window.OFFERWISE_CTX = {
+  role: "{{ role }}",
+  level: "{{ level }}",
+  city: "{{ city }}",
+  base: parseFloat("{{ base|default:'0' }}"),
+  bonus: parseFloat("{{ bonus|default:'0' }}"),
+  jb: parseFloat("{{ jb|default:'0' }}"),
+  p25: parseFloat("{{ p25|default:'0' }}"),
+  p50: parseFloat("{{ p50|default:'0' }}"),
+  p75: parseFloat("{{ p75|default:'0' }}")
+};
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.offerwiseScriptInit) window.offerwiseScriptInit();
+});
+</script>
+{% endblock %}

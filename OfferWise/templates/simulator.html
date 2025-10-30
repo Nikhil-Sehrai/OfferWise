@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Counter Simulator · OfferWise{% endblock %}
+{% block content %}
+<h2 class="mb-3">Counter Simulator</h2>
+<div class="card shadow-sm p-3">
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label class="form-label">Base Δ% <span id="basePctV" class="badge text-bg-light">0%</span></label>
+      <input id="basePct" type="range" class="form-range" min="-10" max="25" value="0">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Bonus Δ% <span id="bonusPctV" class="badge text-bg-light">0%</span></label>
+      <input id="bonusPct" type="range" class="form-range" min="-10" max="30" value="0">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Ask Level Change</label>
+      <select id="lvlAsk" class="form-select">
+        <option value="same">Stay</option>
+        <option value="up">Ask L5</option>
+      </select>
+    </div>
+  </div>
+  <hr>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="stat-card">
+        <div class="stat-label">Projected CTC</div>
+        <div id="ctc" class="stat-value mono">₹ –</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <div class="stat-label">Δ vs current</div>
+        <div id="delta" class="stat-value mono">₹ –</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <div class="stat-label">Risk</div>
+        <div><span id="riskTxt" class="badge rounded-pill text-bg-secondary">–</span></div>
+        <div id="riskNote" class="small text-secondary mt-1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+  <a class="btn btn-primary" href="{% url 'script_studio' %}?role={{ role }}&city={{ city }}&level={{ level }}&base={{ base }}&bonus={{ bonus }}&jb={{ jb }}&p25={{ p25 }}&p50={{ p50 }}&p75={{ p75 }}">Generate Script</a>
+  <a class="btn btn-outline-secondary" href="{% url 'benchmarks' %}">Back</a>
+</div>
+
+<script>
+window.OFFERWISE_CTX = {
+  role: "{{ role }}",
+  level: "{{ level }}",
+  city: "{{ city }}",
+  base: parseFloat("{{ base|default:'0' }}"),
+  bonus: parseFloat("{{ bonus|default:'0' }}"),
+  jb: parseFloat("{{ jb|default:'0' }}"),
+  p25: parseFloat("{{ p25|default:'0' }}"),
+  p50: parseFloat("{{ p50|default:'0' }}"),
+  p75: parseFloat("{{ p75|default:'0' }}")
+};
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.offerwiseInit) window.offerwiseInit();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Home · OfferWise{% endblock %}
+{% block content %}
+<section class="py-4">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold">Negotiate with confidence — ethically.</h1>
+      <p class="lead text-secondary">OfferWise helps students evaluate offers, simulate realistic counters with risk guardrails, and send recruiter‑friendly emails.</p>
+      <div class="d-flex gap-2">
+        <a href="{% url 'offer_new' %}" class="btn btn-primary btn-lg">Start New Offer</a>
+        <a href="{% url 'learning_hub' %}" class="btn btn-outline-primary btn-lg">See How It Works</a>
+      </div>
+      <div class="mt-3 small text-secondary">Privacy-first prototype · Built with Bootstrap</div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="stat-card">
+                <div class="stat-value">+₹0.8L</div>
+                <div class="stat-label">Avg. Δ CTC (pilot)</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card">
+                <div class="stat-value">92%</div>
+                <div class="stat-label">Faster time‑to‑counter</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="progress" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="height:10px;">
+                <div class="progress-bar" style="width: 65%"></div>
+              </div>
+              <div class="small text-secondary mt-2">Negotiation Readiness</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
