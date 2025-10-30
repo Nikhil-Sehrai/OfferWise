@@ -102,6 +102,8 @@ USE_TZ = True
 # Static files served from /static/ in dev
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]   # <-- our pack's /static
+# Where collectstatic will gather all static files
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # (Optional) If you ever add uploads later:
 MEDIA_URL = 'media/'
@@ -111,3 +113,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Django 5 defaults
 # --------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
